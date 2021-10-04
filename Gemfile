@@ -11,4 +11,4 @@ gem "minitest", "~> 5.0"
 
 gem "rubocop", "~> 0.80"
 
-gem 'rbnacl'
+gem "rbnacl"
