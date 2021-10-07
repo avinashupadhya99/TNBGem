@@ -21,6 +21,7 @@ module Thenewboston
     end
 
     def create_signature(message)
+      message = Thenewboston::Util::Conversions.hash_to_str(message) unless message.is_a?(String)
       Thenewboston::Util::Conversions.key_to_str(@signing_key.sign(message))
     end
 
