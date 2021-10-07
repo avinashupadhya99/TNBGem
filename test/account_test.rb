@@ -53,13 +53,13 @@ class TestAccount < Minitest::Test
   def test_that_keypairs_can_be_validated
     signing_key = "15fbd07fc5e5764bf5919ad41151066f0708e9e2dc11dd42dd1dd671e9485b20"
     account_number = "46c5b1e48822bfc9ce8ecd21b90af2ba70e19088f37d3e40738dfdb71871e8b7"
-    assert_equal true, Thenewboston::Account.valid_keypair?(account_number, signing_key)
+    assert Thenewboston::Account.valid_keypair?(account_number, signing_key)
   end
 
   def test_that_keypair_validation_does_not_throw_errors_for_invalid_keys
     signing_key = "15fbd07fc5e5764bf5919ad41151066f0708e9e2dc11dd42dd1dd671e9485b20"
     account_number = "guhuigtr"
-    assert_equal false, Thenewboston::Account.valid_keypair?(signing_key, account_number)
-    assert_equal false, Thenewboston::Account.valid_keypair?(account_number, signing_key)
+    refute Thenewboston::Account.valid_keypair?(signing_key, account_number)
+    refute Thenewboston::Account.valid_keypair?(account_number, signing_key)
   end
 end
