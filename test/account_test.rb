@@ -62,4 +62,13 @@ class TestAccount < Minitest::Test
     refute Thenewboston::Account.valid_keypair?(signing_key, account_number)
     refute Thenewboston::Account.valid_keypair?(account_number, signing_key)
   end
+
+  def test_that_account_can_verify_signature_once_signed
+    account = Thenewboston::Account.new
+    message = { trust: "26.90" }
+    signature = account.create_signature(message)
+
+    assert Thenewboston::Account.valid_signature?(message, signature, account.account_number_hex)
+    refute Thenewboston::Account.valid_signature?(message, signature, account.signing_key_hex)
+  end
 end
