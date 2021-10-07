@@ -33,6 +33,12 @@ module Thenewboston
       }
     end
 
+    def self.valid_keypair?(account_number_string, signing_key_string)
+      new(signing_key_string).account_number_hex == account_number_string
+    rescue StandardError
+      false
+    end
+
     def key_to_str(key)
       key.each_byte.map { |byte| format("%<byte>02x", byte: byte) }.join
     end
