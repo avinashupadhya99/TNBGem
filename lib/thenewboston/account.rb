@@ -40,5 +40,16 @@ module Thenewboston
     rescue StandardError
       false
     end
+
+    def self.valid_signature?(message, signature_hex, account_number_string)
+      signature = Thenewboston::Util::Conversions.str_to_key(signature_hex)
+      account_number = Thenewboston::Util::Conversions.str_to_key(account_number_string)
+      verify_key = RbNaCl::VerifyKey.new(account_number)
+      message_str = Thenewboston::Util::Conversions.hash_to_str(message) unless message.is_a?(String)
+
+      verify_key.verify(signature, message_str)
+    rescue StandardError
+      false
+    end
   end
 end
