@@ -20,6 +20,10 @@ module Thenewboston
       @signing_key_hex = key_to_str(@signing_key.to_bytes)
     end
 
+    def create_signature(message)
+      key_to_str(@signing_key.sign(message))
+    end
+
     def key_to_str(key)
       key.each_byte.map { |byte| format("%<byte>02x", byte: byte) }.join
     end
