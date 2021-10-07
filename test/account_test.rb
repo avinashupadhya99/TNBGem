@@ -28,4 +28,11 @@ class TestAccount < Minitest::Test
     end
     assert_match "Signing key provided should be 64 characters", err.message
   end
+
+  def test_that_account_can_create_signatures
+    account = Thenewboston::Account.new
+    message = "Hello World"
+    signature = account.create_signature(message)
+    assert_equal 128, signature.length, "Signature generated should have 128 characters"
+  end
 end
