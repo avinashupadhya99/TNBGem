@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="Avinash Upadhyaya K R">
+        <link rel="canonical" href="https://avinashupadhya99.github.io/TNBGem/account/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Account - thenewboston gem docs</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">thenewboston gem docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Documentation</a>
+                            </li>
+                            <li class="navitem active">
+                                <a href="./" class="nav-link">Account</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href=".." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#account" class="nav-link">Account</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#creating-accounts" class="nav-link">Creating Accounts</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#getting-account-numbers-and-signing-keys" class="nav-link">Getting Account Numbers and Signing Keys</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#creating-signatures" class="nav-link">Creating Signatures</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#verifying-signatures" class="nav-link">Verifying Signatures</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#verifying-account-keys" class="nav-link">Verifying Account Keys</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#using-signed-data-and-signed-messages" class="nav-link">Using Signed Data and Signed Messages</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="account">Account</h1>
+<p>In this section, we will discuss how to create accounts and use them within other parts of your code with ease.</p>
+<h2 id="creating-accounts">Creating Accounts</h2>
+<p>Creating local accounts with thenewboston gem is extremely simple. All you have to do is access the <code>Account</code> class under the <code>Thenewboston</code> module from the library. These accounts are also used when updating thenewboston server nodes (banks + validators) with requests. Here is a simple example of us using the <code>Account</code> class:</p>
+<pre><code class="language-rb"># Generates a random account with a random hex signing key string.
+account = Thenewboston::Account.new
+
+account.account_number_hex # random account number hex string
+account.signing_key_hex # random account signing key hex string
+</code></pre>
+<p>As you can tell, if you don't pass in anything into the <code>Account</code> class, then it just generates a random account for you. Now, let's get a little more complex, you can pass in the <code>signing_key</code> as the first parameter within <code>Account</code> and it will set the <code>signing_key_hex</code> of the <code>Account</code> as it. Also, since we are using the signing-based cryptographic algorithms, the <code>account_number_hex</code> can be generated automatically. Here is an example of this behavior in action:</p>
+<pre><code class="language-rb">signing_key = &quot;15fbd07fc5e5764bf5919ad41151066f0708e9e2dc11dd42dd1dd671e9485b20&quot;
+account = Thenewboston::Account.new(signing_key)
+
+account.account_number_hex # the corresponding account number hex
+account.signing_key_hex # the account signing key
+</code></pre>
+<blockquote>
+<p>Remember: You <strong>must</strong> keep your account signing key secret at all times. If someone obtains your signing key, then your account is compromised along with all of its funds.</p>
+</blockquote>
+<p>Alright, so we have checked out all of the other ways of instantiating an <code>Account</code> with this library.</p>
+<h2 id="getting-account-numbers-and-signing-keys">Getting Account Numbers and Signing Keys</h2>
+<p>Obviously, this was used in the earlier examples when we were getting the account number and signing key as a hex string. Here is an example of us getting the <code>account_number_hex</code> and <code>signing_key_hex</code> of a random <code>Account</code>:</p>
+<pre><code class="language-rb">account = Thenewboston::Account.new
+
+account.account_number_hex # the account number hex string
+account.signing_key_hex # the account signing key hex string
+</code></pre>
+<h2 id="creating-signatures">Creating Signatures</h2>
+<p>In this section, we will learn how to create signatures for a given <code>Account</code> using the <code>create_signature</code> method for a <code>message</code>.</p>
+<blockquote>
+<p>If you don't understand what these signatures and private/public keys <em>really</em> are, then check out <a href="https://www.preveil.com/blog/public-and-private-key/">this article by Prevail on the topic</a>.</p>
+</blockquote>
+<p>The <code>create_signature</code> method just takes in one parameter: a <code>string</code> that is the message to generate a signature for. Here is an example of us signing <code>"Hello world"</code>:</p>
+<pre><code class="language-rb">account = Thenewboston::Account.new
+signature = account.create_signature(&quot;Hello World&quot;) # the generated signature generated using the account's `signingKey` and `message`
+</code></pre>
+<p>From running that code, you can see that the <code>create_signature</code> method returned a 128 character long hex string signature.</p>
+<blockquote>
+<p>If you re-run that code multiple times, you will then notice that the generated signature is different. That is because the signature depends on two variables: the account signing key and the message. The account signing key also is changing on every run because we are generating a random <code>Account</code> to use, thus resulting in different outcomes.</p>
+</blockquote>
+<h2 id="verifying-signatures">Verifying Signatures</h2>
+<p>If you need to verify a signature for a message, then you can easily use the <code>Account.valid_signature?</code> static method. The method takes in the message first, the signature (signed message) second and then the account number last. Here is example of how one might use this method:</p>
+<pre><code class="language-rb">account = Thenewboston::Account.new
+message = { greeting: &quot;Hello World&quot; }
+signature = account.create_signature(message)
+
+Thenewboston::Account.valid_signature?(message, signature, account.account_number_hex)
+# returns true only if the account number was used to sign the message and the signed message matches the signature
+</code></pre>
+<h2 id="verifying-account-keys">Verifying Account Keys</h2>
+<p>If you need to verify that the given signing key and account number are paired together, then you can easily use the <code>Account.isValidPair</code> static method. The method takes in the signing key first and the account number second. Here is example of how one might use this method:</p>
+<pre><code class="language-rb">Thenewboston::Account.valid_keypair?(&quot;SIGNING_KEY&quot;, &quot;ACCOUNT_NUMBER&quot;); # returns true only if the signing key's public key is the given account number
+</code></pre>
+<h2 id="using-signed-data-and-signed-messages">Using Signed Data and Signed Messages</h2>
+<p>We have already talked about creating signatures, so let's learn how we can apply them to creating signed messages. Here is an example of us creating a signed message:</p>
+<blockquote>
+<p>Note that all of the <code>signature</code> and <code>node_identifier</code> properties that we are generating are <em>almost</em> random as we are not passing any arguments into the <code>Account</code> class.</p>
+</blockquote>
+<pre><code class="language-rb">account = Thenewboston::Account.new
+
+signed_message = account.create_signed_message({ name: &quot;Tuna&quot; })
+
+# {
+#     :data=&gt; { :name=&gt; &quot;Tuna&quot; },
+#     :node_identifier=&gt; &quot;4c8eef36b3d1466a61806c2a76480c64e5b5a0a7e0b84076d86d029b4e448c05&quot;,
+#     :signature=&gt;         &quot;61e16531f8ed0db1900c81d2d6591770fc1f10e762eb86e0f4e57ac5c5637e7d5bdc168d2eee36ef26093dc4f8e9205291fb124869fb28d0e6f643d558e9f107&quot;
+# } 
+</code></pre>
+<p>If you were to log out <code>account</code>'s <code>account_number_hex</code>, then you would realize that the <code>node_identifier</code> is just that account. The reason for that is because only servers have the account signing key to be able to authenticate their requests.</p>
+<p>Alright, so that's the <code>Account</code> class in a nutshell! If you have any things you would like to add please send a pull request or an issue so we can fix it!</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: 
+Check out the [documentation here](https://avinashupadhya99.github.io/TNBGem/)
 
 ## Development
 
