@@ -24,12 +24,29 @@ module Thenewboston
       key_to_str(@signing_key.sign(message))
     end
 
+    def create_signed_message(message)
+      signature = key_to_str(@signing_key.sign(hash_to_str(message)))
+      {
+        data: message,
+        node_identifier: @account_number_hex,
+        signature: signature
+      }
+    end
+
     def key_to_str(key)
       key.each_byte.map { |byte| format("%<byte>02x", byte: byte) }.join
     end
 
     def str_to_key(str)
       "".tap { |binary| str.scan(/../) { |hn| binary << hn.to_i(16).chr } }
+    end
+
+    def hash_to_str(hash)
+      if hash.is_a?(String)
+        "\"#{hash}\""
+      else
+        "{" + hash.map { |k, v| "\"#{k}\":#{hash_to_str(v)}" }.join(",") + "}"
+      end
     end
   end
 end
