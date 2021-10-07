@@ -35,4 +35,18 @@ class TestAccount < Minitest::Test
     signature = account.create_signature(message)
     assert_equal 128, signature.length, "Signature generated should have 128 characters"
   end
+
+  def test_that_account_can_create_signed_messages
+    account = Thenewboston::Account.new("61647c0dd309646ea5b3868c8c237158483a10484b0485663e4f82a68a10535e")
+    message = { trust: "26.90" }
+    signed_message = account.create_signed_message(message)
+
+    assert_equal message, signed_message[:data], "Signed message should contain the initial message as data"
+    assert_equal account.account_number_hex,
+                 signed_message[:node_identifier],
+                 "Signed message should contain the account number as the node identifier"
+    assert_equal 128,
+                 signed_message[:signature].length,
+                 "Signed message's signature generated should have 128 characters"
+  end
 end
