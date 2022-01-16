@@ -29,7 +29,7 @@ module Thenewboston
       message_str = Thenewboston::Util::Conversions.hash_to_str(message)
       signature = Thenewboston::Util::Conversions.key_to_str(@signing_key.sign(message_str))
       {
-        data: message,
+        message: message,
         node_identifier: @account_number_hex,
         signature: signature
       }

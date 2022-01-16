@@ -41,7 +41,7 @@ class TestAccount < Minitest::Test
     message = { trust: "26.90" }
     signed_message = account.create_signed_message(message)
 
-    assert_equal message, signed_message[:data], "Signed message should contain the initial message as data"
+    assert_equal message, signed_message[:message], "Signed message should contain the initial message as message"
     assert_equal account.account_number_hex,
                  signed_message[:node_identifier],
                  "Signed message should contain the account number as the node identifier"
