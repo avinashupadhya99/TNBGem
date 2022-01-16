@@ -4,7 +4,7 @@ require "test_helper"
 require "json"
 require_relative "utils/conversions"
 
-class TestBank < Minitest::Test
+class TestBank < Minitest::Test # rubocop:disable Metrics/ClassLength
   # TODO: Before all
   # TODO: Decrease AbcSize for method
   def setup # rubocop:disable Metrics/MethodLength
@@ -29,6 +29,13 @@ class TestBank < Minitest::Test
     stub_request(:get, "#{bank_url}/banks")
       .with(query: { "limit" => 20, "offset" => 0 })
       .to_return body: all_bank_details_data_json, headers: { content_type: "application/json" }
+
+    # Bank config stub
+    bank_config_file = File.open "test/data/bank/config.json"
+    bank_config_data = JSON.parse bank_config_file.read
+    bank_config_data_json = bank_config_data.to_json
+    stub_request(:get, "#{bank_url}/config")
+      .to_return body: bank_config_data_json, headers: { content_type: "application/json" }
   end
 
   def test_that_bank_can_be_created_with_valid_url
@@ -102,5 +109,37 @@ class TestBank < Minitest::Test
     }
 
     assert_equal bank_details, banks_detail["results"][0]
+  end
+
+  def test_that_bank_can_get_bank_config # rubocop:disable Metrics/MethodLength
+    bank = Thenewboston::Bank.new("http://54.183.16.194")
+    bank_config = bank.get_config
+
+    bank_configuration = {
+      "primary_validator" => {
+        "account_number" => "cafd36d7fc4eb7a7a2b2d242432b4af05a70a7fa54ba5bafcaf0a79a44aa9e43",
+        "ip_address" => "52.52.160.149",
+        "node_identifier" => "245c38bd9cfcff1337e6350826a3016e7b5a76ebc593e6ad89d27f2bda868ebf",
+        "port" => 80,
+        "protocol" => "http",
+        "version" => "v1.0",
+        "default_transaction_fee" => 1,
+        "root_account_file" => "http://52.52.160.149:80/media/root_account_file.json",
+        "root_account_file_hash" => "c7946c8ab7f978c925b91269e260f64fba080e867150fcc73c6310c2f66ca6ef",
+        "seed_block_identifier" => "",
+        "daily_confirmation_rate" => 1,
+        "trust" => "100.00"
+      },
+      "account_number" => "982dcfc62db8f1733141c8f5c29e25c8b4489dbf237053d1589d9a3909037187",
+      "ip_address" => "54.183.16.194",
+      "node_identifier" => "88d57e07642fa7e4ee23906aa1bc0db779ee0d4fa442361fd27ec663d4b69ace",
+      "port" => 80,
+      "protocol" => "http",
+      "version" => "v1.0",
+      "default_transaction_fee" => 1,
+      "node_type" => "BANK"
+    }
+
+    assert_equal bank_configuration, bank_config
   end
 end
