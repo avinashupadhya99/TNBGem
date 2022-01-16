@@ -23,10 +23,11 @@ module Thenewboston
     end
 
     def get_paginated_data(endpoint, options)
-      self.get_data(endpoint, {
-          **@options[:defaultPagination],
-          **options
-      })    
+      get_data endpoint,
+               {
+                 **@options[:defaultPagination],
+                 **options
+               }
     end
   end
 end

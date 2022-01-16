@@ -14,5 +14,5 @@ gem "rubocop", "~> 0.80"
 gem "rbnacl"
 
 group :test do
-    gem "webmock"
+  gem "webmock"
 end
