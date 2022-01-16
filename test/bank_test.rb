@@ -6,8 +6,9 @@ require_relative "utils/conversions"
 
 class TestBank < Minitest::Test
   # TODO: Before all
-  def setup
+  def setup # rubocop:disable Metrics/MethodLength
     bank_url = "http://54.183.16.194"
+    node_identifier = "ddf057f339fbd165c268bf84956ce186eb4209c8b5e81900509cbbc70b6876c5"
 
     # Bank transactions stub
     bank_transactions_file = File.open "test/data/bank/bank_transactions.json"
@@ -16,6 +17,13 @@ class TestBank < Minitest::Test
     stub_request(:get, "#{bank_url}/bank_transactions")
       .with(query: { "limit" => 20, "offset" => 0 })
       .to_return body: bank_transactions_data_json, headers: { content_type: "application/json" }
+
+    # Bank details stub
+    bank_details_file = File.open "test/data/bank/banks.json"
+    bank_details_data = JSON.parse bank_details_file.read
+    individual_bank_details_data_json = bank_details_data["get"]["results"][0].to_json
+    stub_request(:get, "#{bank_url}/banks/#{node_identifier}")
+      .to_return body: individual_bank_details_data_json, headers: { content_type: "application/json" }
   end
 
   def test_that_bank_can_be_created_with_valid_url
@@ -52,5 +60,24 @@ class TestBank < Minitest::Test
     }
 
     assert_equal transaction, bank_transactions["results"][0]
+  end
+
+  def test_that_bank_can_get_data_of_a_bank # rubocop:disable Metrics/MethodLength
+    bank = Thenewboston::Bank.new("http://54.183.16.194")
+    node_identifier = "ddf057f339fbd165c268bf84956ce186eb4209c8b5e81900509cbbc70b6876c5"
+    bank_detail = bank.get_bank(node_identifier)
+
+    bank_details = {
+      "account_number" => "ddf057f339fbd165c268bf84956ce186eb4209c8b5e81900509cbbc70b6876c5",
+      "ip_address" => "13.233.77.254",
+      "node_identifier" => "ddf057f339fbd165c268bf84956ce186eb4209c8b5e81900509cbbc70b6876c5",
+      "port" => 80,
+      "protocol" => "http",
+      "version" => "v1.0",
+      "default_transaction_fee" => 1,
+      "trust" => "0.00"
+    }
+
+    assert_equal bank_details, bank_detail
   end
 end

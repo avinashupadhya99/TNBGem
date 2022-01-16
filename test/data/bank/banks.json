@@ -1,0 +1,49 @@
+{
+    "get": {
+        "count": 4,
+        "next": null,
+        "previous": null,
+        "results": [
+            {
+                "account_number": "ddf057f339fbd165c268bf84956ce186eb4209c8b5e81900509cbbc70b6876c5",
+                "ip_address": "13.233.77.254",
+                "node_identifier": "ddf057f339fbd165c268bf84956ce186eb4209c8b5e81900509cbbc70b6876c5",
+                "port": 80,
+                "protocol": "http",
+                "version": "v1.0",
+                "default_transaction_fee": 1,
+                "trust": "0.00"
+            },
+            {
+                "account_number": "855edee3204f0bbc6b14b2d61d56fd06636d6d6400fd3ff97644c11d9588d1e2",
+                "ip_address": "45.33.60.42",
+                "node_identifier": "8534f05f7eac8cb0cbf4d591c51484fc20c6ee9c522b5213e4572e68d97991be",
+                "port": 80,
+                "protocol": "http",
+                "version": "v1.0",
+                "default_transaction_fee": 1,
+                "trust": "0.00"
+            },
+            {
+                "account_number": "982dcfc62db8f1733141c8f5c29e25c8b4489dbf237053d1589d9a3909037187",
+                "ip_address": "54.183.16.194",
+                "node_identifier": "88d57e07642fa7e4ee23906aa1bc0db779ee0d4fa442361fd27ec663d4b69ace",
+                "port": 80,
+                "protocol": "http",
+                "version": "v1.0",
+                "default_transaction_fee": 1,
+                "trust": "100.00"
+            },
+            {
+                "account_number": "6ec99cf6656845c526fda71f1b437fe7de965e3c425b96c44b27c12a58872e93",
+                "ip_address": "52.2.117.242",
+                "node_identifier": "14607d3ee4f50d72ac4204eac9b52e9c8db8dda67347c7eba6e6ea3e8b0de7d9",
+                "port": 80,
+                "protocol": "http",
+                "version": "v1.0",
+                "default_transaction_fee": 1,
+                "trust": "0.00"
+            }
+        ]
+    }    
+}
