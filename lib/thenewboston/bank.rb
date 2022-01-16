@@ -10,5 +10,9 @@ module Thenewboston
     def get_bank(node_identifier)
       get_data("/banks/#{node_identifier}")
     end
+
+    def get_banks(options = {})
+      get_paginated_data("/banks", options)
+    end
   end
 end
