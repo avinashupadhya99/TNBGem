@@ -15,6 +15,10 @@ module Thenewboston
       get_paginated_data("/banks", options)
     end
 
+    def get_accounts(options = {})
+      get_paginated_data("/accounts", options)
+    end
+
     def get_config # rubocop:disable Naming/AccessorMethodName
       get_data("/config")
     end
