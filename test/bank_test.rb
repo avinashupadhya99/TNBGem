@@ -41,8 +41,12 @@ class TestBank < Minitest::Test # rubocop:disable Metrics/ClassLength
     # Accounts stub
     account_details_file = File.open "test/data/bank/account.json"
     account_details_data = JSON.parse account_details_file.read
-    account_details_data_json = account_details_data["patch"].to_json
+    account_patch_details_data_json = account_details_data["patch"].to_json
+    account_details_data_json = account_details_data["get"].to_json
     stub_request(:patch, "#{bank_url}/accounts/#{account_number}")
+      .to_return body: account_patch_details_data_json, headers: { content_type: "application/json" }
+    stub_request(:get, "#{bank_url}/accounts")
+      .with(query: { "limit" => 20, "offset" => 0 })
       .to_return body: account_details_data_json, headers: { content_type: "application/json" }
 
     # Bank patch stub
@@ -191,5 +195,20 @@ class TestBank < Minitest::Test # rubocop:disable Metrics/ClassLength
     }
 
     assert_equal bank_details, patched_bank_details
+  end
+
+  def test_that_bank_can_get_data_of_all_accounts
+    bank = Thenewboston::Bank.new("http://54.183.16.194")
+    accounts_detail = bank.get_accounts
+
+    account_details = {
+      "id" => "4e4380f8-2dff-4a84-96c2-4b331f8a7be8",
+      "created_date" => "2021-07-01T04:30:08.212090Z",
+      "modified_date" => "2021-07-01T04:30:08.212111Z",
+      "account_number" => "a37e2836805975f334108b55523634c995bd2a4db610062f404510617e83126f",
+      "trust" => "0.00"
+    }
+
+    assert_equal account_details, accounts_detail["results"][0]
   end
 end

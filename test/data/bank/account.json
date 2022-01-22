@@ -1,4 +1,67 @@
 {
+    "get": {
+        "count": 382,
+        "next": "http://54.183.16.194/accounts?limit=50&offset=50",
+        "previous": null,
+        "results": [
+            {
+                "id": "4e4380f8-2dff-4a84-96c2-4b331f8a7be8",
+                "created_date": "2021-07-01T04:30:08.212090Z",
+                "modified_date": "2021-07-01T04:30:08.212111Z",
+                "account_number": "a37e2836805975f334108b55523634c995bd2a4db610062f404510617e83126f",
+                "trust": "0.00"
+            },
+            {
+                "id": "91abda6d-dc64-430c-a8d8-61df0fafc913",
+                "created_date": "2021-07-01T04:42:21.887061Z",
+                "modified_date": "2021-07-01T04:42:21.887079Z",
+                "account_number": "982dcfc62db8f1733141c8f5c29e25c8b4489dbf237053d1589d9a3909037187",
+                "trust": "0.00"
+            },
+            {
+                "id": "a2fff604-3ac3-464f-93e5-9a721a277541",
+                "created_date": "2021-07-01T05:01:02.263341Z",
+                "modified_date": "2021-07-01T05:01:02.263360Z",
+                "account_number": "5ad13fd8cc674da7a3ad35426e0fcfe3a3157a044ebda0f54b9b32ee873ea921",
+                "trust": "0.00"
+            },
+            {
+                "id": "831c8d1b-32d1-4720-a74b-1891dfa06f04",
+                "created_date": "2021-07-01T05:31:42.188885Z",
+                "modified_date": "2021-07-01T05:31:42.188904Z",
+                "account_number": "ddf057f339fbd165c268bf84956ce186eb4209c8b5e81900509cbbc70b6876c5",
+                "trust": "0.00"
+            },
+            {
+                "id": "592137e3-dea4-4d4e-a117-85d77c8f9a99",
+                "created_date": "2021-07-01T11:38:27.760754Z",
+                "modified_date": "2021-07-01T11:38:27.760773Z",
+                "account_number": "c54c04774efaae20746fd3f29cdd619fea512e119bc1082b863572b2e8844104",
+                "trust": "0.00"
+            },
+            {
+                "id": "8e1213ee-965d-4b8b-9507-581a57236321",
+                "created_date": "2021-07-01T18:29:54.421515Z",
+                "modified_date": "2021-07-01T18:29:54.421533Z",
+                "account_number": "0f92e975101eb96cea80dce430d74efd3172fa229377818d467ded85dcf2ab6c",
+                "trust": "0.00"
+            },
+            {
+                "id": "f92daabf-752c-4a06-8320-bf2ddd0affee",
+                "created_date": "2021-07-01T22:17:14.530467Z",
+                "modified_date": "2021-07-01T22:17:14.530486Z",
+                "account_number": "83078088f56118e2432e7a8a0bfff738d391068bb9a36061149a2408623d1d0a",
+                "trust": "0.00"
+            },
+            {
+                "id": "800ed23d-2409-49c2-9f1a-9a07f96f044f",
+                "created_date": "2021-07-01T22:17:23.511302Z",
+                "modified_date": "2021-07-01T22:17:23.511321Z",
+                "account_number": "fe06754d2dbf23509e975809e9023b620509c1e6618472f16c9659f59e940337",
+                "trust": "0.00"
+            }
+        ]
+    },
     "patch": {
         "id": "4e4380f8-2dff-4a84-96c2-4b331f8a7be8",
         "created_date": "2021-07-01T04:30:08.212090Z",
