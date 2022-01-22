@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="Avinash Upadhyaya K R">
+        <link rel="canonical" href="https://avinashupadhya99.github.io/TNBGem/bank/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Bank - thenewboston gem docs</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">thenewboston gem docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Documentation</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../account/" class="nav-link">Account</a>
+                            </li>
+                            <li class="navitem active">
+                                <a href="./" class="nav-link">Bank</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../account/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#bank" class="nav-link">Bank</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#creating-banks" class="nav-link">Creating Banks</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#get-config" class="nav-link">Get Config</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#get-accounts" class="nav-link">Get accounts</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#update-account-trust" class="nav-link">Update account trust</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#get-transactions" class="nav-link">Get Transactions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#get-banks" class="nav-link">Get Banks</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#get-individual-bank" class="nav-link">Get individual bank</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#update-bank-trust" class="nav-link">Update bank trust</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="bank">Bank</h1>
+<p>In this section, we will discuss how to interact with thenewboston banks using your code.</p>
+<h2 id="creating-banks">Creating Banks</h2>
+<p>Creating a Bank object will allow you to interact with thenewboston bank through code. It takes the URL of the bank as a parameter.</p>
+<pre><code class="language-rb"># Instantiates a new bank
+bank = Thenewboston::Bank.new(&quot;http://54.183.16.194&quot;)
+</code></pre>
+<p>You can get the URL passed as a parameter once the object is created - </p>
+<pre><code class="language-rb">bank.url
+# http://54.183.16.194
+</code></pre>
+<p>It also takes a second optional parameter to specify the pagination options. In case it is not passed, there are default values set -</p>
+<pre><code class="language-rb">bank.options
+# {:defaultPagination=&gt;{:limit=&gt;20, :offset=&gt;0}} 
+</code></pre>
+<p>You can set your pagination options while creating the bank object as follows -</p>
+<pre><code class="language-rb">bank = Thenewboston::Bank.new(&quot;http://54.183.16.194&quot;, {defaultPagination: {limit: 10, offset: 10}})
+bank.options
+# {:defaultPagination=&gt;{:limit=&gt;10, :offset=&gt;10}}
+</code></pre>
+<blockquote>
+<p>The defaultPagination object is used as default options, when API calls are made to the bank.</p>
+</blockquote>
+<h2 id="get-config">Get Config</h2>
+<p>The bank configuration can be retrieved as follows - </p>
+<pre><code class="language-rb">config = bank.get_config
+# {&quot;primary_validator&quot;=&gt;{&quot;account_number&quot;=&gt;&quot;cafd36d7fc4eb7a7a2b2d242432b4af05a70a7fa54ba5bafcaf0a79a44aa9e43&quot;, &quot;ip_address&quot;=&gt;&quot;52.52.160.149&quot;, &quot;node_identifier&quot;=&gt;&quot;245c38bd9cfcff1337e6350826a3016e7b5a76ebc593e6ad89d27f2bda868ebf&quot;, &quot;port&quot;=&gt;80, &quot;protocol&quot;=&gt;&quot;http&quot;, &quot;version&quot;=&gt;&quot;v1.0&quot;, &quot;default_transaction_fee&quot;=&gt;1, &quot;root_account_file&quot;=&gt;&quot;http://52.52.160.149:80/media/root_account_file.json&quot;, &quot;root_account_file_hash&quot;=&gt;&quot;c7946c8ab7f978c925b91269e260f64fba080e867150fcc73c6310c2f66ca6ef&quot;, &quot;seed_block_identifier&quot;=&gt;&quot;&quot;, &quot;daily_confirmation_rate&quot;=&gt;1, &quot;trust&quot;=&gt;&quot;100.00&quot;}, &quot;account_number&quot;=&gt;&quot;982dcfc62db8f1733141c8f5c29e25c8b4489dbf237053d1589d9a3909037187&quot;, &quot;ip_address&quot;=&gt;&quot;54.183.16.194&quot;, &quot;node_identifier&quot;=&gt;&quot;88d57e07642fa7e4ee23906aa1bc0db779ee0d4fa442361fd27ec663d4b69ace&quot;, &quot;port&quot;=&gt;80, &quot;protocol&quot;=&gt;&quot;http&quot;, &quot;version&quot;=&gt;&quot;v1.0&quot;, &quot;default_transaction_fee&quot;=&gt;1, &quot;node_type&quot;=&gt;&quot;BANK&quot;} 
+</code></pre>
+<p>The function <code>get_config</code> does not take any parameters. The config includes data like selected primary validator, IP address, port, node identifier and so on.</p>
+<h2 id="get-accounts">Get accounts</h2>
+<p>We can get the accounts which are linked to the bank with the <code>get_accounts</code> method -</p>
+<pre><code class="language-rb">accounts = bank.get_accounts
+# {&quot;count&quot;=&gt;382, &quot;next&quot;=&gt;&quot;http://54.183.16.194/accounts?limit=20&amp;offset=20&quot;, &quot;previous&quot;=&gt;nil, &quot;results&quot;=&gt;[{&quot;id&quot;=&gt;&quot;4e4380f8-2dff-4a84-96c2-4b331f8a7be8&quot;, &quot;created_date&quot;=&gt;&quot;2021-07-01T04:30:08.212090Z&quot;, &quot;modified_date&quot;=&gt;&quot;2021-07-01T04:30:08.212111Z&quot;, &quot;account_number&quot;=&gt;&quot;a37e2836805975f334108b55523634c995bd2a4db610062f404510617e83126f&quot;, &quot;trust&quot;=&gt;&quot;0.00&quot;}, ...]}
+</code></pre>
+<h2 id="update-account-trust">Update account trust</h2>
+<p>The trust for a particular account can be updated as follows</p>
+<pre><code class="language-rb">signing_key = &quot;15fbd07fc5e5764bf5919ad41151066f0708e9e2dc11dd42dd1dd671e9485b20&quot;
+account = Thenewboston::Account.new(signing_key)
+trust = 50
+account_details = bank.update_account_trust(account.account_number_hex, trust, account)
+# {&quot;id&quot;=&gt;&quot;4e4380f8-2dff-4a84-96c2-4b331f8a7be8&quot;, &quot;created_date&quot;=&gt;&quot;2021-07-01T04:30:08.212090Z&quot;, &quot;modified_date&quot;=&gt;&quot;2021-07-01T04:30:08.212111Z&quot;, &quot;account_number&quot;=&gt;&quot;a37e2836805975f334108b55523634c995bd2a4db610062f404510617e83126f&quot;, &quot;trust&quot;=&gt;&quot;50.00&quot;}
+</code></pre>
+<h2 id="get-transactions">Get Transactions</h2>
+<p>We can get all the bank transactions using the <code>get_transactions</code> method -</p>
+<pre><code class="language-rb">transactions = bank.get_transactions
+# {&quot;count&quot;=&gt;16652, &quot;next&quot;=&gt;&quot;http://54.183.16.194/bank_transactions?limit=20&amp;offset=20&quot;, &quot;previous&quot;=&gt;nil, &quot;results&quot;=&gt;[{&quot;id&quot;=&gt;&quot;65541a71-19b2-464d-aea2-71c9a0602e08&quot;, &quot;block&quot;=&gt;{&quot;id&quot;=&gt;&quot;cf4dc112-61c8-45fd-9aaa-76abe9b9dac4&quot;, &quot;created_date&quot;=&gt;&quot;2022-01-22T16:58:40.497600Z&quot;, &quot;modified_date&quot;=&gt;&quot;2022-01-22T16:58:40.497629Z&quot;, &quot;balance_key&quot;=&gt;&quot;b8b900adbd408bb225803bf581d830c9c538088276c7d5358ca79aa53969324f&quot;, &quot;sender&quot;=&gt;&quot;0913b206c1baf493a9c490d8bae279202977b387184c1bd630d0626e9846867b&quot;, &quot;signature&quot;=&gt;&quot;79bb2fdb48d95bc32d46ff4e5d42dd083ece5971d60fce59191feda8afa304f8a630e110fd7acad23f823083c504b8c8033c9a961d8078cecdb7afee020f720d&quot;}, &quot;amount&quot;=&gt;1, &quot;fee&quot;=&gt;&quot;BANK&quot;, &quot;memo&quot;=&gt;&quot;&quot;, &quot;recipient&quot;=&gt;&quot;982dcfc62db8f1733141c8f5c29e25c8b4489dbf237053d1589d9a3909037187&quot;}, {&quot;id&quot;=&gt;&quot;69650fc9-463e-4cd3-9ece-f66f9a9ad0fa&quot;, &quot;block&quot;=&gt;{&quot;id&quot;=&gt;&quot;cf4dc112-61c8-45fd-9aaa-76abe9b9dac4&quot;, &quot;created_date&quot;=&gt;&quot;2022-01-22T16:58:40.497600Z&quot;, &quot;modified_date&quot;=&gt;&quot;2022-01-22T16:58:40.497629Z&quot;, &quot;balance_key&quot;=&gt;&quot;b8b900adbd408bb225803bf581d830c9c538088276c7d5358ca79aa53969324f&quot;, &quot;sender&quot;=&gt;&quot;0913b206c1baf493a9c490d8bae279202977b387184c1bd630d0626e9846867b&quot;, &quot;signature&quot;=&gt;&quot;79bb2fdb48d95bc32d46ff4e5d42dd083ece5971d60fce59191feda8afa304f8a630e110fd7acad23f823083c504b8c8033c9a961d8078cecdb7afee020f720d&quot;}, &quot;amount&quot;=&gt;1, &quot;fee&quot;=&gt;&quot;&quot;, &quot;memo&quot;=&gt;&quot;tnb_gifts_437f11061dc9433e9169e66f8afcf18c&quot;, &quot;recipient&quot;=&gt;&quot;c4caa42b2a01b31ee187468ac63bd64745f67ec3b20191a54eb55ba20d5adbb0&quot;}, ...]}
+</code></pre>
+<h2 id="get-banks">Get Banks</h2>
+<p>We can use <code>get_banks</code> method to get all connected banks</p>
+<pre><code class="language-rb">banks = bank.get_banks
+# {&quot;count&quot;=&gt;4, &quot;next&quot;=&gt;nil, &quot;previous&quot;=&gt;nil, &quot;results&quot;=&gt;[{&quot;account_number&quot;=&gt;&quot;ddf057f339fbd165c268bf84956ce186eb4209c8b5e81900509cbbc70b6876c5&quot;, &quot;ip_address&quot;=&gt;&quot;13.233.77.254&quot;, &quot;node_identifier&quot;=&gt;&quot;ddf057f339fbd165c268bf84956ce186eb4209c8b5e81900509cbbc70b6876c5&quot;, &quot;port&quot;=&gt;80, &quot;protocol&quot;=&gt;&quot;http&quot;, &quot;version&quot;=&gt;&quot;v1.0&quot;, &quot;default_transaction_fee&quot;=&gt;1, &quot;trust&quot;=&gt;&quot;0.00&quot;}, {&quot;account_number&quot;=&gt;&quot;855edee3204f0bbc6b14b2d61d56fd06636d6d6400fd3ff97644c11d9588d1e2&quot;, &quot;ip_address&quot;=&gt;&quot;45.33.60.42&quot;, &quot;node_identifier&quot;=&gt;&quot;8534f05f7eac8cb0cbf4d591c51484fc20c6ee9c522b5213e4572e68d97991be&quot;, &quot;port&quot;=&gt;80, &quot;protocol&quot;=&gt;&quot;http&quot;, &quot;version&quot;=&gt;&quot;v1.0&quot;, &quot;default_transaction_fee&quot;=&gt;1, &quot;trust&quot;=&gt;&quot;0.00&quot;}, {&quot;account_number&quot;=&gt;&quot;982dcfc62db8f1733141c8f5c29e25c8b4489dbf237053d1589d9a3909037187&quot;, &quot;ip_address&quot;=&gt;&quot;54.183.16.194&quot;, &quot;node_identifier&quot;=&gt;&quot;88d57e07642fa7e4ee23906aa1bc0db779ee0d4fa442361fd27ec663d4b69ace&quot;, &quot;port&quot;=&gt;80, &quot;protocol&quot;=&gt;&quot;http&quot;, &quot;version&quot;=&gt;&quot;v1.0&quot;, &quot;default_transaction_fee&quot;=&gt;1, &quot;trust&quot;=&gt;&quot;100.00&quot;}, {&quot;account_number&quot;=&gt;&quot;6ec99cf6656845c526fda71f1b437fe7de965e3c425b96c44b27c12a58872e93&quot;, &quot;ip_address&quot;=&gt;&quot;52.2.117.242&quot;, &quot;node_identifier&quot;=&gt;&quot;14607d3ee4f50d72ac4204eac9b52e9c8db8dda67347c7eba6e6ea3e8b0de7d9&quot;, &quot;port&quot;=&gt;80, &quot;protocol&quot;=&gt;&quot;http&quot;, &quot;version&quot;=&gt;&quot;v1.0&quot;, &quot;default_transaction_fee&quot;=&gt;1, &quot;trust&quot;=&gt;&quot;0.00&quot;}]}
+</code></pre>
+<h2 id="get-individual-bank">Get individual bank</h2>
+<p>We can also get details about a particular bank using the <code>get_bank</code> method and passing the bank's <em>node_identifier</em></p>
+<pre><code class="language-rb">bank_details = bank.get_bank(&quot;ddf057f339fbd165c268bf84956ce186eb4209c8b5e81900509cbbc70b6876c5&quot;)
+# {&quot;account_number&quot;=&gt;&quot;ddf057f339fbd165c268bf84956ce186eb4209c8b5e81900509cbbc70b6876c5&quot;, &quot;ip_address&quot;=&gt;&quot;13.233.77.254&quot;, &quot;node_identifier&quot;=&gt;&quot;ddf057f339fbd165c268bf84956ce186eb4209c8b5e81900509cbbc70b6876c5&quot;, &quot;port&quot;=&gt;80, &quot;protocol&quot;=&gt;&quot;http&quot;, &quot;version&quot;=&gt;&quot;v1.0&quot;, &quot;default_transaction_fee&quot;=&gt;1, &quot;trust&quot;=&gt;&quot;0.00&quot;} 
+</code></pre>
+<h2 id="update-bank-trust">Update bank trust</h2>
+<p>We can also update the trust of a specific bank by using the <code>update_bank_trust</code> method</p>
+<pre><code class="language-rb">signing_key = &quot;15fbd07fc5e5764bf5919ad41151066f0708e9e2dc11dd42dd1dd671e9485b20&quot;
+network_id_key_pair = Thenewboston::Account.new(signing_key)
+trust = 50
+bank_to_update = &quot;ddf057f339fbd165c268bf84956ce186eb4209c8b5e81900509cbbc70b6876c5&quot; 
+bank.update_bank_trust(bank_to_update, trust, network_id_key_pair)
+# {&quot;account_number&quot;=&gt;&quot;46c5b1e48822bfc9ce8ecd21b90af2ba70e19088f37d3e40738dfdb71871e8b7&quot;, &quot;ip_address&quot;=&gt;&quot;54.183.16.194&quot;, &quot;node_identifier&quot;=&gt;&quot;ddf057f339fbd165c268bf84956ce186eb4209c8b5e81900509cbbc70b6876c5&quot;, &quot;port&quot;=&gt;80, &quot;protocol&quot;=&gt;&quot;http&quot;, &quot;version&quot;=&gt;&quot;v1.0&quot;, &quot;default_transaction_fee&quot;=&gt;1, &quot;trust&quot;=&gt;&quot;50.00&quot;}
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
