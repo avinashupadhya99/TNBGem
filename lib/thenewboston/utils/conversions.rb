@@ -16,6 +16,8 @@ module Thenewboston
       def self.hash_to_str(hash)
         if hash.is_a?(String)
           "\"#{hash}\""
+        elsif hash.is_a?(Integer)
+          hash.to_s
         else
           "{" + hash.map { |k, v| "\"#{k}\":#{hash_to_str(v)}" }.join(",") + "}"
         end

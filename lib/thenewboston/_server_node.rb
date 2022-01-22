@@ -29,5 +29,16 @@ module Thenewboston
                  **options
                }
     end
+
+    def patch_data(endpoint, data)
+      uri = URI("#{@url}#{endpoint}")
+      request = Net::HTTP::Patch.new(uri)
+      request.content_type = "application/json"
+      request.body = JSON.dump(data)
+      response = Net::HTTP.start(uri.hostname, uri.port) do |http|
+        http.request(request)
+      end
+      JSON.parse(response.body) if response.is_a?(Net::HTTPSuccess)
+    end
   end
 end

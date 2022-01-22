@@ -18,5 +18,9 @@ module Thenewboston
     def get_config # rubocop:disable Naming/AccessorMethodName
       get_data("/config")
     end
+
+    def update_account_trust(account_number, trust, account)
+      patch_data("/accounts/#{account_number}", account.create_signed_message({ trust: trust }))
+    end
   end
 end
