@@ -10,6 +10,7 @@ class TestBank < Minitest::Test # rubocop:disable Metrics/ClassLength
   def setup # rubocop:disable Metrics/MethodLength
     bank_url = "http://54.183.16.194"
     node_identifier = "ddf057f339fbd165c268bf84956ce186eb4209c8b5e81900509cbbc70b6876c5"
+    account_number = "28e6cb168337a864eb34a0b4d70bb730c288a20872f11825d11fdec724e5562d"
 
     # Bank transactions stub
     bank_transactions_file = File.open "test/data/bank/bank_transactions.json"
@@ -36,6 +37,13 @@ class TestBank < Minitest::Test # rubocop:disable Metrics/ClassLength
     bank_config_data_json = bank_config_data.to_json
     stub_request(:get, "#{bank_url}/config")
       .to_return body: bank_config_data_json, headers: { content_type: "application/json" }
+
+    # Accounts stub
+    account_details_file = File.open "test/data/bank/account.json"
+    account_details_data = JSON.parse account_details_file.read
+    account_details_data_json = account_details_data["patch"].to_json
+    stub_request(:patch, "#{bank_url}/accounts/#{account_number}")
+      .to_return body: account_details_data_json, headers: { content_type: "application/json" }
   end
 
   def test_that_bank_can_be_created_with_valid_url
@@ -141,5 +149,22 @@ class TestBank < Minitest::Test # rubocop:disable Metrics/ClassLength
     }
 
     assert_equal bank_configuration, bank_config
+  end
+
+  def test_that_bank_can_update_account_trust # rubocop:disable Metrics/MethodLength
+    bank = Thenewboston::Bank.new("http://54.183.16.194")
+    account_number = "28e6cb168337a864eb34a0b4d70bb730c288a20872f11825d11fdec724e5562d"
+    account = Thenewboston::Account.new("ba7283b54b1a259e3fa99db44909d6af7ecde24007f82d465ba8c288adeb39ab")
+    patched_account_details = bank.update_account_trust(account_number, 10, account)
+
+    account_details = {
+      "id" => "4e4380f8-2dff-4a84-96c2-4b331f8a7be8",
+      "created_date" => "2021-07-01T04:30:08.212090Z",
+      "modified_date" => "2021-07-01T04:30:08.212111Z",
+      "account_number" => "28e6cb168337a864eb34a0b4d70bb730c288a20872f11825d11fdec724e5562d",
+      "trust" => "99.98"
+    }
+
+    assert_equal account_details, patched_account_details
   end
 end
