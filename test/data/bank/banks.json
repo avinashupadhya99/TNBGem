@@ -45,5 +45,15 @@
                 "trust": "0.00"
             }
         ]
-    }    
+    },
+    "patch": {
+        "account_number": "28e6cb168337a864eb34a0b4d70bb730c288a20872f11825d11fdec724e5562d",
+        "ip_address": "54.183.16.194",
+        "node_identifier": "ddf057f339fbd165c268bf84956ce186eb4209c8b5e81900509cbbc70b6876c5",
+        "port": 80,
+        "protocol": "http",
+        "version": "v1.0",
+        "default_transaction_fee": 1,
+        "trust": "10.00"
+    }
 }

@@ -44,6 +44,11 @@ class TestBank < Minitest::Test # rubocop:disable Metrics/ClassLength
     account_details_data_json = account_details_data["patch"].to_json
     stub_request(:patch, "#{bank_url}/accounts/#{account_number}")
       .to_return body: account_details_data_json, headers: { content_type: "application/json" }
+
+    # Bank patch stub
+    bank_patch_details_data_json = bank_details_data["patch"].to_json
+    stub_request(:patch, "#{bank_url}/banks/#{node_identifier}")
+      .to_return body: bank_patch_details_data_json, headers: { content_type: "application/json" }
   end
 
   def test_that_bank_can_be_created_with_valid_url
@@ -166,5 +171,25 @@ class TestBank < Minitest::Test # rubocop:disable Metrics/ClassLength
     }
 
     assert_equal account_details, patched_account_details
+  end
+
+  def test_that_bank_can_update_bank_trust # rubocop:disable Metrics/MethodLength
+    bank = Thenewboston::Bank.new("http://54.183.16.194")
+    node_identifier = "ddf057f339fbd165c268bf84956ce186eb4209c8b5e81900509cbbc70b6876c5"
+    account = Thenewboston::Account.new("ba7283b54b1a259e3fa99db44909d6af7ecde24007f82d465ba8c288adeb39ab")
+    patched_bank_details = bank.update_bank_trust(node_identifier, 10, account)
+
+    bank_details = {
+      "account_number" => "28e6cb168337a864eb34a0b4d70bb730c288a20872f11825d11fdec724e5562d",
+      "ip_address" => "54.183.16.194",
+      "node_identifier" => "ddf057f339fbd165c268bf84956ce186eb4209c8b5e81900509cbbc70b6876c5",
+      "port" => 80,
+      "protocol" => "http",
+      "version" => "v1.0",
+      "default_transaction_fee" => 1,
+      "trust" => "10.00"
+    }
+
+    assert_equal bank_details, patched_bank_details
   end
 end
