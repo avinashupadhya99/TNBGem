@@ -22,5 +22,9 @@ module Thenewboston
     def update_account_trust(account_number, trust, account)
       patch_data("/accounts/#{account_number}", account.create_signed_message({ trust: trust }))
     end
+
+    def update_bank_trust(node_identifier, trust, account)
+      patch_data("/banks/#{node_identifier}", account.create_signed_message({ trust: trust }))
+    end
   end
 end
