@@ -15,25 +15,25 @@ There are two ways to use the library.
 
 - [Account](account.md#account)
 
-  - [Creating Accounts](account.md#creating-and-updating-accounts)
+    - [Creating Accounts](account.md#creating-and-updating-accounts)
 
-  - [Getting Account Numbers and Signing Keys](account.md#getting-account-numbers-and-signing-keys)
+    - [Getting Account Numbers and Signing Keys](account.md#getting-account-numbers-and-signing-keys)
 
-  - [Verifying key pair](account.md#verifying-key-pair)
+    - [Verifying key pair](account.md#verifying-key-pair)
 
-  - [Creating Signatures](account.md#creating-signatures)
+    - [Creating Signatures](account.md#creating-signatures)
 
-  - [Using Signed Data and Signed Messages](account.md#using-signed-data-and-signed-messages)
+    - [Using Signed Data and Signed Messages](account.md#using-signed-data-and-signed-messages)
 
 - [Bank](bank.md#bank)
 
-  - [Creating Banks](bank.md#creating-banks)
+    - [Creating Banks](bank.md#creating-banks)
 
-  - [Get Config](bank.md#get-config)
+    - [Get Config](bank.md#get-config)
 
-  - [Get accounts](bank.md#get-accounts)
+    - [Get accounts](bank.md#get-accounts)
 
-  - [Update account trust](bank.md#update-account-trust)
+    - [Update account trust](bank.md#update-account-trust)
 
   - [Get Transactions](bank.md#get-transactions)
 
