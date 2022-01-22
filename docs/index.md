@@ -24,3 +24,21 @@ There are two ways to use the library.
   - [Creating Signatures](account.md#creating-signatures)
 
   - [Using Signed Data and Signed Messages](account.md#using-signed-data-and-signed-messages)
+
+- [Bank](bank.md#bank)
+
+  - [Creating Banks](bank.md#creating-banks)
+
+  - [Get Config](bank.md#get-config)
+
+  - [Get accounts](bank.md#get-accounts)
+
+  - [Update account trust](bank.md#update-account-trust)
+
+  - [Get Transactions](bank.md#get-transactions)
+
+  - [Get Banks](bank.md#get-banks)
+
+  - [Get individual bank](bank.md#get-individual-bank)
+
+  - [Update bank trust](bank.md#update-bank-trust)
